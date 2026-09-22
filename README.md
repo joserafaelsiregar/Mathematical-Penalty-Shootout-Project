@@ -1,0 +1,1 @@
+This game is a combination of football and math quizzes which i thought of. I want this game to be an educational medium for children who are interested in football and are having difficulties in understanding math. So i made this game to motivate them to answer correctly and witness iconic celebrations of their favorite star Christiano Ronaldo
