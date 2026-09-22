@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CR7 Penalty Math Shootout: Portugal vs France | Junior High Math</title>
+    <meta name="description" content="Step up as Cristiano Ronaldo (Portugal #7) against France! Solve Junior High School math problems, aim for 6 tactical goal zones, beat the French goalkeeper with diverse saves, and perform the iconic SIUUU celebration on every goal!">
+    <meta name="theme-color" content="#050a14">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        
+        <!-- =========================================================
+             1. START / MAIN MENU SCREEN
+             ========================================================= -->
+        <main id="start-screen" class="screen">
+            <div class="menu-wrapper">
+                <div class="tournament-logo">
+                    <span>🏆</span> European Math Championship Final
+                </div>
+                
+                <h1 class="game-main-title">Penalty Math Shootout</h1>
+                <p class="game-sub-title">Junior High School Math Challenge • Portugal vs France</p>
+
+                <!-- Ronaldo Feature Badge -->
+                <div class="cr7-player-badge">
+                    <span>🇵🇹</span> <b>CRISTIANO RONALDO (#7)</b> <span>• Penalty Taker</span>
+                </div>
+
+                <!-- Match Clash Presentation: Portugal vs France -->
+                <div class="teams-clash-banner">
+                    <div class="team-card-banner portugal-card">
+                        <span class="team-flag">🇵🇹</span>
+                        <span class="team-name" style="color: #ffd700;">PORTUGAL</span>
+                        <span class="team-role">Striker: C. Ronaldo #7</span>
+                    </div>
+
+                    <div class="vs-badge">VS</div>
+
+                    <div class="team-card-banner france-card">
+                        <span class="team-flag">🇫🇷</span>
+                        <span class="team-name" style="color: #00d2ff;">FRANCE</span>
+                        <span class="team-role">Goalkeeper: Les Bleus</span>
+                    </div>
+                </div>
+
+                <!-- Game Rules Briefing -->
+                <div class="how-to-play-box">
+                    <div class="rule-item">
+                        <span class="rule-icon">🎯</span>
+                        <span><b>6 Goal Target Zones:</b> Solve the Junior High math problem and aim for the corresponding zone.</span>
+                    </div>
+                    <div class="rule-item">
+                        <span class="rule-icon">🧤</span>
+                        <span><b>Realistic Goalkeeper:</b> France reacts with dynamic, non-repetitive diving and save motions!</span>
+                    </div>
+                    <div class="rule-item">
+                        <span class="rule-icon">⚡</span>
+                        <span><b>Iconic "SIUUU!":</b> Score every goal to unleash Ronaldo's legendary jump & turn SIUU celebration!</span>
+                    </div>
+                    <div class="rule-item">
+                        <span class="rule-icon">⭐</span>
+                        <span><b>Hat-Trick 3 Stars:</b> Score all 3 penalties in a round to achieve a <b>Hat-Trick (3 Stars)</b>!</span>
+                    </div>
+                </div>
+
+                <!-- Menu Action Buttons -->
+                <div class="menu-actions">
+                    <button class="btn btn-primary" id="start-game-btn">
+                        <span>🏆</span> Start Tournament
+                    </button>
+                    <button class="btn btn-gold" id="quick-play-btn">
+                        <span>⚡</span> Quick Shootout (SIUUU)
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- =========================================================
+             2. LEVEL / TOURNAMENT SELECT SCREEN
+             ========================================================= -->
+        <section id="level-select-screen" class="screen hidden" aria-label="Level Select Screen">
+            <div class="screen-header">
+                <div class="header-title-group">
+                    <button class="icon-btn back-to-menu-btn" aria-label="Back to Main Menu">
+                        <span>← Back to Menu</span>
+                    </button>
+                    <h2>Tournament Stages</h2>
+                    <p>Score Hat-Tricks with Cristiano Ronaldo across all 6 tournament stages!</p>
+                </div>
+
+                <div class="stars-summary-badge">
+                    <span>⭐ Total Stars:</span>
+                    <span id="header-stars-count">0 ★</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Levels Grid -->
+            <div class="levels-grid" id="levels-grid"></div>
+        </section>
+
+        <!-- =========================================================
+             3. ACTIVE GAMEPLAY SCREEN (STADIUM & 6-ZONE GOAL)
+             ========================================================= -->
+        <section id="game-screen" class="screen hidden" aria-label="Match Screen">
+            
+            <!-- Top HUD & Scoreboard Bar -->
+            <header class="game-top-bar">
+                <div class="top-bar-left">
+                    <button class="icon-btn back-to-levels-btn" title="Back to Stages">
+                        <span>📋 Stages</span>
+                    </button>
+                    <button class="icon-btn" id="open-scratchpad-btn" title="Open Chalkboard Scratchpad">
+                        <span>✏️ Scratchpad</span>
+                    </button>
+                    <button class="icon-btn" id="open-formulas-btn" title="Math Formulas Reference">
+                        <span>📐 Formulas</span>
+                    </button>
+                </div>
+
+                <!-- Central Jumbotron Scoreboard -->
+                <div class="scoreboard-wrapper">
+                    <div class="jumbotron-score">
+                        <div class="team-box player-team">
+                            <span id="player-flag">🇵🇹</span>
+                            <span id="team-player-name">CR7 PORTUGAL</span>
+                        </div>
+
+                        <!-- 3-Shot Penalty Dots Indicator -->
+                        <div class="shootout-dots-container" title="3 Penalties per Round">
+                            <span class="shot-dot" id="shot-dot-0">⚽</span>
+                            <span class="shot-dot" id="shot-dot-1">⚽</span>
+                            <span class="shot-dot" id="shot-dot-2">⚽</span>
+                        </div>
+
+                        <div class="team-box opponent-team">
+                            <span id="team-opponent-name">FRANCE</span>
+                            <span id="opponent-flag">🇫🇷</span>
+                        </div>
+                    </div>
+                    <div class="stage-badge" id="stage-badge">STAGE 1: GROUP STAGE</div>
+                </div>
+
+                <!-- Right Sound & Audio Controls -->
+                <div class="top-bar-right">
+                    <button class="icon-btn active" id="sound-toggle" title="Toggle Sound FX">
+                        <span>🔊 SFX On</span>
+                    </button>
+                    <button class="icon-btn active" id="ambient-toggle" title="Toggle Stadium Crowd Noise">
+                        <span>🏟️ Crowd On</span>
+                    </button>
+                    <button class="icon-btn active" id="commentary-toggle" title="Toggle Commentary">
+                        <span>🎙️ Comm On</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Question Jumbotron Banner -->
+            <div class="question-banner" id="question-banner">
+                <div class="question-topic-tag" id="question-topic">PENALTY 1 OF 3 • LINEAR EQUATIONS</div>
+                <div class="question-body-text" id="question-body">
+                    Solve for <span class="math-var">x</span>: <span class="math-eq">2x + 7 = 19</span>
+                </div>
+            </div>
+
+            <!-- Stadium Canvas Viewport -->
+            <div class="stadium-viewport">
+                <canvas id="game-canvas"></canvas>
+
+                <!-- 6-Zone Tactical Target Grid (Overlay on Goal Frame) -->
+                <div class="goal-target-grid" id="goal-target-grid">
+                    <!-- Row 1: Top 3 Zones -->
+                    <div class="target-zone zone-0" data-zone="0" role="button" tabindex="0" title="Zone 1 (Upper 90 Left)">
+                        <span class="zone-hotkey-badge">1 / Q</span>
+                        <svg class="zone-crosshair" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <line x1="3" y1="12" x2="7" y2="12"/>
+                            <line x1="17" y1="12" x2="21" y2="12"/>
+                        </svg>
+                        <div class="option-badge">Option 1</div>
+                    </div>
+
+                    <div class="target-zone zone-1" data-zone="1" role="button" tabindex="0" title="Zone 2 (Top Center)">
+                        <span class="zone-hotkey-badge">2 / W</span>
+                        <svg class="zone-crosshair" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <line x1="3" y1="12" x2="7" y2="12"/>
+                            <line x1="17" y1="12" x2="21" y2="12"/>
+                        </svg>
+                        <div class="option-badge">Option 2</div>
+                    </div>
+
+                    <div class="target-zone zone-2" data-zone="2" role="button" tabindex="0" title="Zone 3 (Upper 90 Right)">
+                        <span class="zone-hotkey-badge">3 / E</span>
+                        <svg class="zone-crosshair" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <line x1="3" y1="12" x2="7" y2="12"/>
+                            <line x1="17" y1="12" x2="21" y2="12"/>
+                        </svg>
+                        <div class="option-badge">Option 3</div>
+                    </div>
+
+                    <!-- Row 2: Bottom 3 Zones -->
+                    <div class="target-zone zone-3" data-zone="3" role="button" tabindex="0" title="Zone 4 (Low Left Corner)">
+                        <span class="zone-hotkey-badge">4 / A</span>
+                        <svg class="zone-crosshair" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <line x1="3" y1="12" x2="7" y2="12"/>
+                            <line x1="17" y1="12" x2="21" y2="12"/>
+                        </svg>
+                        <div class="option-badge">Option 4</div>
+                    </div>
+
+                    <div class="target-zone zone-4" data-zone="4" role="button" tabindex="0" title="Zone 5 (Low Center)">
+                        <span class="zone-hotkey-badge">5 / S</span>
+                        <svg class="zone-crosshair" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <line x1="3" y1="12" x2="7" y2="12"/>
+                            <line x1="17" y1="12" x2="21" y2="12"/>
+                        </svg>
+                        <div class="option-badge">Option 5</div>
+                    </div>
+
+                    <div class="target-zone zone-5" data-zone="5" role="button" tabindex="0" title="Zone 6 (Low Right Corner)">
+                        <span class="zone-hotkey-badge">6 / D</span>
+                        <svg class="zone-crosshair" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <line x1="3" y1="12" x2="7" y2="12"/>
+                            <line x1="17" y1="12" x2="21" y2="12"/>
+                        </svg>
+                        <div class="option-badge">Option 6</div>
+                    </div>
+                </div>
+
+                <!-- Feedback Flash Banner Overlay -->
+                <div id="feedback-banner" class="feedback-banner hidden">
+                    <span>⚡ GOOOOOAL! ⚡</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             4. MODALS & DIALOGS
+             ========================================================= -->
+
+        <!-- A. Level Complete & Hat-Trick 3-Star Rating Modal -->
+        <div id="result-modal" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 id="modal-title">🏆 CR7 HAT-TRICK HERO! 🏆</h2>
+                    <span id="modal-badge" class="modal-badge hat-trick-badge">PERFECT 3/3 PENALTIES SCORED! SIUUU!</span>
+                </div>
+
+                <!-- Star Rating Graphics (🌟🌟🌟) -->
+                <div class="modal-stars-container" id="modal-stars-container">
+                    <span class="result-star earned">★</span>
+                    <span class="result-star earned">★</span>
+                    <span class="result-star earned">★</span>
+                </div>
+
+                <p class="modal-score-text" id="modal-score-text">Ronaldo scored 3 / 3 goals against France!</p>
+
+                <!-- Shot Breakdown List -->
+                <ul class="summary-list" id="modal-summary-list"></ul>
+
+                <div class="modal-actions">
+                    <button class="btn btn-secondary back-to-levels-btn">
+                        <span>📋 Stage Select</span>
+                    </button>
+                    <button class="btn btn-secondary" id="retry-level-btn">
+                        <span>🔄 Retry Stage</span>
+                    </button>
+                    <button class="btn btn-primary" id="next-level-btn">
+                        <span>⚡ Next Stage →</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- B. Step-by-Step Math Solution / Explanation Modal -->
+        <div id="explanation-modal" class="modal-overlay hidden">
+            <div class="modal-card explanation-card">
+                <div class="modal-header">
+                    <h2>🧤 Shot Breakdown & Analysis</h2>
+                    <span class="modal-badge lose-badge" id="exp-topic">Linear Equations</span>
+                </div>
+
+                <div class="exp-box">
+                    <p id="exp-question" style="font-weight: 700; margin-bottom: 10px;"></p>
+                    <div class="exp-shot-compare">
+                        <span id="exp-user-choice" style="color: #ff5252;">Your Strike: 12 ❌</span>
+                        <span id="exp-correct-ans" style="color: #2ecc71;">Winning Target: 6 🎯</span>
+                    </div>
+                    <div class="exp-step-content" id="exp-body"></div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="close-exp-btn">
+                        <span>Continue Match →</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- C. Interactive Scratchpad / Chalkboard Modal -->
+        <div id="scratchpad-modal" class="modal-overlay hidden">
+            <div class="modal-card scratchpad-card">
+                <div class="scratchpad-toolbar">
+                    <div class="color-picker-group">
+                        <button class="pad-color-btn active" data-color="#ffffff" style="background: #ffffff;" title="White Chalk"></button>
+                        <button class="pad-color-btn" data-color="#ffd700" style="background: #ffd700;" title="Yellow Chalk"></button>
+                        <button class="pad-color-btn" data-color="#00d2ff" style="background: #00d2ff;" title="Cyan Chalk"></button>
+                        <button class="pad-color-btn" data-color="#ff4757" style="background: #ff4757;" title="Red Chalk"></button>
+                        <button class="pad-color-btn" data-color="#2ed573" style="background: #2ed573;" title="Green Chalk"></button>
+                    </div>
+                    <div>
+                        <button class="icon-btn" id="pad-eraser-btn" title="Eraser">🧹 Eraser</button>
+                        <button class="icon-btn" id="pad-clear-btn" title="Clear Blackboard">🗑️ Clear All</button>
+                        <button class="icon-btn" id="close-scratchpad-btn" title="Close Scratchpad">✖ Close</button>
+                    </div>
+                </div>
+
+                <div class="pad-canvas-wrapper">
+                    <canvas id="scratchpad-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- D. Junior High Math Formulas Cheatsheet Modal -->
+        <div id="formulas-modal" class="modal-overlay hidden">
+            <div class="modal-card" style="max-width: 680px;">
+                <div class="modal-header">
+                    <h2>📐 Middle School Math Formulas</h2>
+                    <span class="modal-badge win-badge">Quick Reference Sheet</span>
+                </div>
+
+                <div class="formulas-grid">
+                    <div class="formula-card">
+                        <h4>Algebra & Equations</h4>
+                        <p>• ax + b = c ⇒ ax = c - b<br>• (a + b)² = a² + 2ab + b²<br>• a² - b² = (a - b)(a + b)</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Geometry: Angles</h4>
+                        <p>• Complementary = 90°<br>• Supplementary = 180°<br>• Triangle Angles Sum = 180°</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Pythagorean Theorem</h4>
+                        <p>• a² + b² = c² (Right Triangle)<br>• c = √(a² + b²)<br>• Triples: (3,4,5), (5,12,13)</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Area & Perimeter</h4>
+                        <p>• Triangle: Area = ½ · b · h<br>• Circle Area = π · r²<br>• Circle Circumference = 2 · π · r</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Statistics & Probability</h4>
+                        <p>• Mean = Sum ÷ Total Count<br>• Median = Middle value in order<br>• P(Event) = Favorable ÷ Total</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Volume & 3D Shapes</h4>
+                        <p>• Cylinder: V = π · r² · h<br>• Rectangular Prism: V = l · w · h<br>• Cube: V = s³</p>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="close-formulas-btn">
+                        <span>Got It! Back to Match</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Three.js 3D WebGL Engine (Local with CDN fallback) -->
+    <script src="js/three.min.js"></script>
+    <script>
+        if (typeof THREE === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+        }
+    </script>
+    <!-- Core Game Scripts -->
+    <script src="js/audio.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
